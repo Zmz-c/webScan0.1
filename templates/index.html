@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      {% load static %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Home</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="{%  static 'vendor/bootstrap/css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{%  static 'vendor/fonts-awesome/css/fonts-awesome.min.css'%}">
+    <!-- Google fonts - Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <!-- jQuery Circle-->
+    <link rel="stylesheet" href="{%  static 'css/grasp_mobile_progress_circle-1.0.0.min.css'%}">
+    <!-- Custom Scrollbar-->
+    <link rel="stylesheet" href="{%  static 'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css'%}">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="{%  static 'css/style.default.css'%}" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="{%  static 'css/custom.css'%}">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="{%  static 'img/favicon.icon'%}">
+      </head>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+ <script>
+      const  dataArr={
+             urlnum:JSON.parse('{{url_numT|safe}}'),
+             port_num:JSON.parse("{{ port_numT|safe }}"),
+             sql_num: JSON.parse("{{ sql_numT|safe }}"),
+             v1_numz: JSON.parse("{{ v1_numz|safe }}"),
+             v2_numz: JSON.parse("{{ v2_numz|safe }}"),
+             v3_numz: JSON.parse("{{ v3_numz|safe }}"),
+             v4_numz: JSON.parse("{{ v4_numz|safe }}"),
+             v5_numz: JSON.parse("{{ v5_numz|safe }}"),
+             v6_numz: JSON.parse("{{ v6_numz|safe }}"),
+             v7_numz: JSON.parse("{{ v7_numz|safe }}"),
+}
+ </script>
+  <!-- JavaScript files-->
+    <script src="{%  static 'vendor/jquery/jquery.min.js'%}"></script>
+    <script src="{%  static 'vendor/popper.js/umd/popper.min.js'%}"> </script>
+    <script src="{%  static 'vendor/bootstrap/js/bootstrap.min.js'%}"></script>
+    <script src="{%  static 'js/grasp_mobile_progress_circle-1.0.0.min.js'%}"></script>
+    <script src="{%  static 'vendor/jquery.cookie/jquery.cookie.js'%}"> </script>
+    <script src="{%  static 'vendor/chart.js/Chart.min.js'%}"></script>
+    <script src="{%  static 'vendor/jquery-validation/jquery.validate.min.js'%}"></script>
+    <script src="{%  static 'vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js'%}"></script>
+    <script src="{%  static 'js/charts-home.js'%}"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+     <script src="https://cdn.bootcdn.net/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+  <body>
+    <!-- Side Navbar -->
+    <nav class="side-navbar">
+      <div class="side-navbar-wrapper">
+        <!-- Sidebar Header-->
+        <div class="sidenav-header d-flex align-items-center justify-content-center">
+          <!-- User Info-->
+          <div class="sidenav-header-inner text-center"><img src="{%  static 'img/avater-7.jpg'%}" alt="person" class="img-fluid rounded-circle">
+            <h2 class="h5">{{ username }}</h2><span>Web Developer</span>
+          </div>
+          <!-- Small Brand information, appears on minimized sidebar-->
+          <div class="sidenav-header-logo"><a href="#" class="brand-small text-center" onclick="index()"> <strong>W</strong><strong class="text-primary">S</strong></a></div>
+        </div>
+        <!-- Sidebar Navigation Menus-->
+        <div class="main-menu">
+          <h5 class="sidenav-heading">Main</h5>
+          <ul id="side-main-menu" class="side-menu list-unstyled">                  
+            <li><a href="#" onclick="index()"><i class="bi bi-house-door-fill"></i>Information Center </a></li>
+            <li><a href="#" onClick="sqlClick()"> <i class="bi bi-code-slash"></i> SQLinjection detection</a></li>
+           <li><a href="#" onclick="SOP()"> <i class="bi bi-code-slash"></i></i> Port scan </a></li>
+            <li><a href="#" onclick="sdc()"> <i class="bi bi-code-slash"></i>Sensitive directory scan</a></li>
+            <li><i class="bi bi-shield-fill-plus"></i>web Scan
+                <div class="badge badge-warning">6 New</div></li>
+          </ul>
+        </div>
+        <div class="admin-menu">
+          <h5 class="sidenav-heading">Second menu</h5>
+          <ul id="side-admin-menu" class="side-menu list-unstyled"> 
+            <li> <a href="#" onclick="datatable()"> <i class="bi bi-table"></i>Scanning results</a></li>
+            <li> <a href="#"> <i class="bi bi-pencil"></i>About us
+                <div class="badge badge-info">Special</div></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="page">
+      <!-- navbar-->
+      <header class="header">
+        <nav class="navbar">
+          <div class="container-fluid">
+            <div class="navbar-holder d-flex align-items-center justify-content-between">
+              <div class="navbar-header"><a id="toggle-btn" href="#" class="menu-btn"><i class="bi bi-shield-lock"></i></a><a href="#" class="navbar-brand">
+                  <div class="brand-text d-none d-md-inline-block"><span>SAFE SEE </span><strong class="text-primary">web Scan</strong></div></a></div>
+              <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+                <!-- Log out-->
+                <li class="nav-item"><a href="#" class="nav-link logout" onclick="logout()"><span class="d-none d-sm-inline-block">Logout</span><i class="fa fa-sign-out"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+     <div class="show">
+      <!-- Counts Section -->
+         <div >
+      <section class="dashboard-counts section-padding">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-user"></i></div>
+                <div class="name"><strong class="text-uppercase">Sensitive link</strong><span>today</span>
+                  <div class="count-number">{{ test_urlNum }}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-padnote"></i></div>
+                <div class="name"><strong class="text-uppercase">Sensitive link</strong><span>Last 5 days</span>
+                  <div class="count-number">{{last5_num}}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-check"></i></div>
+                <div class="name"><strong class="text-uppercase"> SQL injection</strong><span>SQL injection vulnerabilities</span>
+                  <div class="count-number">{{ sql_num }}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-bill"></i></div>
+                <div class="name"><strong class="text-uppercase">Sensitive Directories</strong><span>Number of sensitive directories</span>
+                  <div class="count-number">{{  url_num  }}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-list"></i></div>
+                <div class="name"><strong class="text-uppercase">Sensitive link</strong><span>Last 3 months</span>
+                  <div class="count-number">{{ lastm_urlNum }}</div>
+                </div>
+              </div>
+            </div>
+            <!-- Count item widget-->
+            <div class="col-xl-2 col-md-4 col-6">
+              <div class="wrapper count-title d-flex">
+                <div class="icon"><i class="icon-list-1"></i></div>
+                <div class="name"><strong class="text-uppercase">Sensitive link</strong><span>Last 7 days</span>
+                  <div class="count-number">{{ last3_urlNum }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Header Section-->
+      <section class="dashboard-header section-padding">
+        <div class="container-fluid">
+          <div class="row d-flex align-items-md-stretch">
+            <!-- 待做的事-->
+            <div class="col-lg-3 col-md-6">
+              <div class="card to-do">
+                <h2 class="display h4">要做的事</h2>
+                <p>每天学习两小时，快乐中年没头发</p>
+                <ul class="check-lists list-unstyled">
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-1" name="list-1" class="form-control-custom">
+                    <label for="list-1">练习ctf的题目</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-2" name="list-2" class="form-control-custom">
+                    <label for="list-2">锻炼一小时</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-3" name="list-3" class="form-control-custom">
+                    <label for="list-3">有时间的话邂逅一份爱情 </label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-4" name="list-4" class="form-control-custom">
+                    <label for="list-4">尝试挖掘新的漏洞信息</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-5" name="list-5" class="form-control-custom">
+                    <label for="list-5">学习二进制安全</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-6" name="list-6" class="form-control-custom">
+                    <label for="list-6">关注漏洞银行动态</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-7" name="list-7" class="form-control-custom">
+                    <label for="list-7">学习shell编程</label>
+                  </li>
+                  <li class="d-flex align-items-center">
+                    <input type="checkbox" id="list-8" name="list-8" class="form-control-custom">
+                    <label for="list-8">练习poc编写</label>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!-- 图表-->
+            <div class="col-lg-3 col-md-6">
+              <div class="card project-progress">
+                <h2 class="display h4">漏洞统计图表</h2>
+                <p>这里是所有扫描的漏洞，他能直观的体现漏洞数量</p>
+                <div class="pie-chart">
+                  <canvas id="pieChart" width="300" height="300"> </canvas>
+                </div>
+              </div>
+            </div>
+            <!-- 图饼 -->
+            <div class="col-lg-6 col-md-12 flex-lg-last flex-md-first align-self-baseline">
+              <div class="card sales-report">
+                <h2 class="display h4">事态折线图</h2>
+                <p>和前面的信息相比似乎有所不同，这是显示漏洞总数</p>
+                <div class="line-chart">
+                  <canvas id="lineCahrt"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      </div>
+    </div>
+       <!--sql检测页面  -->
+  <div id="SQL">
+        <div >
+          <div class="jumbotron jumbotron-fluid">
+           <div class="container">
+           <span class="badge  badge-danger">webScan</span>
+           <h1 class="display-4">SQL  injection</h1>
+           <p class="lead">SQL injection is caused by too much trust in user input on the server side</p>
+           </div>
+
+</div>
+        </div>
+
+       <div class="container">
+  <div class="row">
+    <div class="col-sm">
+        <b> 看这里:</b><br>
+        <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="在这里提交url" aria-describedby="button-addon2" id="urlsql">
+  <div class="input-group-append">
+    <button class="btn btn-outline-secondary" type="button" id="sqlck" onclick="sqlScan()">提交</button>
+  </div>
+</div>
+        <div class="alert alert-success" role="alert">
+  请注意，如果您没有授权书，那么您当前的行为是非法的，本系统仅为授权用户提供相关检测服务，请勿用于非法用途!
+</div>
+        <div class="alert alert-info" role="alert">
+  SQL注入尽管已经很老，但它依然是流行的漏洞，我们从入侵者的角度来提高信息安全
+</div>
+        <div class="alert alert-danger" role="alert">
+  请勿用于任何非法用途，我们不希望此系统为不怀好意的入侵者提供帮助！
+</div>
+        <div class="alert alert-warning" role="alert">
+ 检测结果仅供参考
+</div>
+    </div>
+    <div class="col-sm">
+     <div class="form-group">
+   <b> <label> 爬取到的URL:</label></b>
+     <textarea class="form-control" id="sqltext" rows="17" value="请输入url开始扫描"></textarea>
+     </div>
+    </div>
+    <div class="col-sm">
+      <div class="form-group">
+      <b> <label> 可能存在的注入点:</label></b>
+          <textarea class="form-control" id="sqlend" rows="15" ></textarea><br>
+         <div style="text-align: center;"> <button type="button" class="btn btn-success" onclick="sqlVDMG()" id="bt1">保存结果</button></div>
+     </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+    <!--端口扫描检测页面  -->
+   <div id="port">
+            <div >
+          <div class="jumbotron jumbotron-fluid">
+           <div class="container">
+           <span class="badge  badge-danger">webScan</span>
+           <h1 class="display-4" >Port scan</h1>
+           <p class="lead">Port scanning is an important means in the process of information collection</p>
+           </div>
+</div>
+     <div class="container px-lg-5">
+  <div class="row mx-lg-n5">
+    <div class="col py-3 px-lg-5 border bg-light"> <label for="basic-url">Your domain name</label>
+        <div class="input-group mb-3">
+         <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">这里输入你的域名</span>
+       </div>
+    <input type="text" class="form-control" id="urlport" aria-describedby="basic-addon3" width="60">
+
+          </div><br><button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="port()">提交</button></div>
+
+
+    <div class="col py-3 px-lg-5 border bg-light">
+
+        <div class="col-sm">
+       <div class="form-group">
+      <b> <label for="exampleFormControlTextarea1">开放的端口:</label></b>
+     <textarea class="form-control" id="portText" rows="17" ></textarea>
+           <div style="text-align: center;"> <button type="button" class="btn btn-success" onclick="urlOM()">查看并保存</button></div>
+     </div>
+    </div>
+    </div>
+  </div>
+</div>
+ </div>
+
+    </div>
+
+        <!--敏感扫描检测页面  -->
+    <div id="MGdir">
+        <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <span class="badge  badge-danger">webScan</span>
+            <h1 class="display-4">Sensitive directory scan</h1>
+           <p class="lead">This is often caused by improper server configuration, and people often ignore it</p>
+        </div>
+
+ </div>
+        <div class="container px-lg-5">
+        <div class="row mx-lg-n5">
+        <div class="col py-3 px-lg-5 border bg-light"> <label for="basic-url">Your domain name</label>
+        <div class="input-group mb-3">
+         <div class="input-group-prepend">
+       <span class="input-group-text" id="basic-addon3">这里输入域名</span>
+       </div>
+          <input type="text" class="form-control" id="urDR" aria-describedby="basic-addon3" width="60">
+          </div><br>
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" onclick="mgd()">提交</button>
+            <br>
+            <br>
+            <div class="alert alert-danger" role="alert">
+           敏感目录是人们最容易忽略的错误之一，它能让入侵者获得更多的东西，以便于下一步进行渗透测试
+       </div>
+    </div>
+
+
+    <div class="col py-3 px-lg-5 border bg-light">
+
+          <div class="col-sm">
+       <div class="form-group">
+      <b> <label for="exampleFormControlTextarea1">可能存在的目录:</label></b>
+     <textarea class="form-control" id="outText" rows="17" ></textarea>
+           <div style="text-align: center;"> <button type="button" class="btn btn-success" onclick="saveVD()">保存结果</button></div>
+
+     </div>
+     </div>
+    </div>
+  </div>
+
+        </div>
+
+        </div>
+
+        <div id="datatable">
+        <table class="table">
+    <thead>
+       <tr>
+       <th scope="col">#</th>
+       <th scope="col">编号</th>
+       <th scope="col">链接</th>
+       <th scope="col">时间</th>
+     </tr>
+   </thead>
+   {% for i in qs %}
+   <tbody>
+     <tr>
+       <th scope="row">#</th>
+       <td>{{ i.id }}</td>
+       <td><a href="#" onclick="pub()">{{ i.url }}</a></td>
+       <td>{{ i.urlTime }}</td>
+   {% endfor %}
+    </tr>
+            </tbody>
+        </table>
+    </div>
+
+  <div id="dataVD">
+         <button type="button" class="btn btn-success" onclick="con()">返回</button>
+        <p> <div style="text-align: center;"><h1>网站漏洞信息统计</h1></div></p>
+        <table class="table">
+    <thead>
+
+       <tr>
+       <th scope="col">#</th>
+       <th scope="col">开放端口</th>
+       <th scope="col">敏感链接</th>
+       <th scope="col">sql注入</th>
+     </tr>
+   </thead>
+       {% for i in url_fz %}
+        <tbody>
+     <tr>
+        <th scope="row">#</th>
+        <td>{{ i.open_port }}</td>
+        <td>{{ i.open_url }}</td>
+        <td>{{ i.open_sql }}</td>
+     </tr>
+       {% endfor %}
+        </tbody>
+        </table>
+    </div>
+
+       <footer class="main-footer">
+         <div class="container-fluid">
+           <div class="row">
+            <div class="col-sm-6">
+              <p>webScan</p>
+             </div>
+            <div class="col-sm-6 text-right">
+              
+              
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script src="{%  static 'js/front.js'%}"></script>
+    {% csrf_token %}
+<script>
+            const csrftoken = $.cookie('csrftoken');
+            function csrfSafeMethod(method) {
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+   };
+          $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+        function logout(){
+            $.ajax({
+        url:'/outlogin/',
+          type: 'get',
+          async: false,
+          data:{
+
+          },
+         success: function(data){
+          window.location.reload();
+         }
+     })
+      }
+        $(document).ready(function(){
+          $('#datatable').hide();
+          $('#SQL').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+          $('#dataVD').hide();
+})
+        function index(){
+          $.ajax({
+        url:'/index/',
+          type: 'get',
+          async: false,
+          data:{
+
+          },
+         success: function(data){
+         }
+     })
+       $('.show').show();
+       $('#datatable').hide();
+       $('#SQL').hide();
+       $('#port').hide();
+       $('#MGdir').hide();
+       $('#dataVD').hide();
+        }
+
+        function sqlScan(){
+
+            $("#sqltext").html("扫描中.....请稍后查看结果")
+          const url = document.getElementById('urlsql').value;
+          console.log(url)
+          $.ajax({
+          url:'/sqlT/',
+          type: 'POST',
+          async: true,
+          datatype: 'json',
+          data:{
+                url:url
+          },
+         success: function(data){
+                 const outMessTextarea = document.getElementById("sqltext");
+                       $("#sqltext").html(data['data']);
+                       $("#sqlend").html(data['V']);
+                       outMessTextarea.scrollTop=outMessTextarea.scrollHeight;
+         }
+     })
+
+      }
+        function sqlClick(){
+          $('#SQL').show();
+          $('.show').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+
+      }
+        function sqlVDMG(){
+          if(document.getElementById('sqlend').value == "") {
+             alert("请耐心等待返回结果!");
+      }else{
+           alert("保存成功!")
+          }
+}
+         function SOP(){
+          $('#datatable').hide();
+          $('#SQL').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+          $('#dataVD').hide();
+          $('#port').toggle();
+          $('.show').hide();
+
+ }
+         function sdc(){
+           $('#datatable').hide();
+          $('#SQL').hide();
+          $('#port').hide();
+          $('#MGdir').show();
+          $('#dataVD').hide();
+          $('.show').hide();
+
+      }
+         function datatable(){
+           $('#SQL').hide();
+          $('.show').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+          $('#dataVD').hide();
+          $('#datatable').show();
+
+        }
+         function port(){
+           $("#portText").html("程序运行中，请稍后查看");
+           let urls1 =document.getElementById('urlport').value;
+          console.log(urls1)
+          $.ajax({
+            url: '/portscan/',
+            type: 'POST',
+            async: true,
+            datatype: 'json',
+            data: {
+               url:urls1,
+            },
+            success: function(data){
+                        const outMessTextarea = document.getElementById("portText");
+                       $("#portText").html("[*]开放的端口:"+data['data']);
+                       outMessTextarea.scrollTop=outMessTextarea.scrollHeight;
+            }
+      })
+      }
+         function urlOM(){
+              if(document.getElementById('portText').value == "") {
+             alert("请耐心等待返回结果!");
+      }else{
+           alert("保存成功!")
+          }
+
+      }
+         function saveVD(){
+         if(document.getElementById('outText').value == "") {
+             alert("请耐心等待返回结果!");
+      }else{
+           alert("保存成功!")
+          }
+
+}
+         function mgd(){
+           $("#outText").html("程序运行中，请稍后查看");
+           let urls1 =document.getElementById('urDR').value;
+          console.log(urls1)
+          $.ajax({
+            url: '/hr/',
+            type: 'POST',
+            async: true,
+            datatype: 'json',
+            data: {
+               url:urls1,
+            },
+            success: function(data){
+                        const outMessTextarea = document.getElementById("outText");
+                       $("#outText").html(data['data']);
+                       outMessTextarea.scrollTop=outMessTextarea.scrollHeight;
+            }
+      })
+      }
+
+         function pub(){
+          $('#SQL').hide();
+          $('.show').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+          $('#dataVD').toggle();
+          $('#datatable').toggle();
+}
+
+         function con(){
+          $('#SQL').hide();
+          $('.show').hide();
+          $('#port').hide();
+          $('#MGdir').hide();
+          $('#dataVD').toggle();
+          $('#datatable').toggle();
+}
+</script>
+  </body>
+</html>
